@@ -1,0 +1,11 @@
+# Cookies
+cookies.json
+canvas-cookies.json
+video-cookies.json
+
+# Files
+course-downloads/
+course-lectures/
+backup/
+meta-downloads/
+__pycache__/
