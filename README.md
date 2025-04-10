@@ -20,9 +20,9 @@ Uses:
    - The lecture scraper runs slowly, takes me 30-40 minutes to run but a more powerful PC or more optimized code can definitely speed it up. 
 2. Course Downloading 
     - Turns the scraped download URLs into local files.
-3. Text-Extractor
+3. Text Extractor
     - Wrangles resources into raw text files. A lot of work can be done here (Tesseract OCR, better chunking, etc.)
-4. Embeddings 
+4. Embeddings Generation
     - Generates embeddings for text files. So far, I've only experimented with lectures, I will experiment with PDFs soon.
 
 TODOs:
