@@ -36,3 +36,32 @@ TODOs:
       - Find similar passages in lectures and suggest lecture slides afterwards?
       - Allow filtering for specific topics within classes (EG find where dynamic programming was introduced in an Algorithms class or a specific lecture)
     - More!
+
+
+---
+
+### Setting Up Postgres
+
+Here's the structure of the tables I'm currently using. There's definitely room for expansion / modification. Off the top of my head: links to live resources, etc.
+
+Note that I used MiniLM-L6-v2 to generate my text embeddings, if you use a different model, you will likely have to change the vector size to accomodate it.
+
+```
+postgres=# CREATE TABLE lectures (
+    lecture_id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    class TEXT,  -- URL/filepath
+    avg_embedding VECTOR(384),  -- Dimension matches MiniLM-L6-v2
+    created_at TIMESTAMP DEFAULT NOW(),
+    metadata JSONB  -- author, date, tags, etc.
+);
+postgres=# CREATE TABLE chunks (
+    chunk_id SERIAL PRIMARY KEY,
+    lecture_id INT NOT NULL REFERENCES lectures(lecture_id) ON DELETE CASCADE,
+    content TEXT NOT NULL,
+    embedding VECTOR(384),  -- Dimension matches MiniLM-L6-v2
+    position INT,  -- Original order in lecture
+    metadata JSONB,  -- page numbers, timestamps, etc.
+    created_at TIMESTAMP DEFAULT NOW()
+);
+```
